@@ -3,35 +3,20 @@ inquiry_automation_repo_branch: release-7.0.0
 provisioningAnnotations: &provisioningAnnotations
   "helm.sh/hook-weight": "-4"
 
-neo4j: &neo4j
-  enabled: true
-  host: "neo4j"
-  port: 7687
-  boltPort: 8687
-  image:
-    repository: sunbirded.azurecr.io/neo4j
-    tag: "3.3.0"
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  provisioning:
-    annotations: *provisioningAnnotations
-    waitForNeo4j: "true"
+migration:
+ yugabyte:
+   waitTime: 120
 
-redis: &redis
-  enabled: true
-  nameOverride: "redis"
-  fullnameOverride: "redis"
-  auth:
-    enabled: false
-  host: "redis-master"
-  port: 6379
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  replica:
-    replicaCount: 0
-  master:
-    persistence:
-      size: 25Gi
+cloud_storage:
+play_http: &play_http
+  secret_key: "a-dummy-play-http-secret-key"
+schema: &schema
+    base_path: "https://{{ .Values.global.object_storage_endpoint }}/{{ .Values.global.public_container_name }}/schemas/local"
+graph_passport: &graph_passport
+  key_base: "a-dummy-graph_passport-secret-key"
+installation: &installation
+  id: ekstep
+
 
 elasticsearch: &es
   enabled: true
@@ -69,37 +54,6 @@ elasticsearch: &es
     registry: sunbirded.azurecr.io
     repository: bitnami-shell-archived
     tag: 11-debian-11-r54
-
-yugabyte: &yugabyte
-  enabled: true
-  nameOverride: "yugabyte"
-  fullnameOverride: "yugabyte"
-  host: "yb-tserver-service" 
-  port: 9042
-  postgresql_port: 5433
-  databases:
-    - name: "keycloak"
-    - name: "quartz"
-    - name: "userorg"
-    - name: "enc-keys"
-    - name: "registry"
-
-  image:
-    registry: yugabytedb
-    repository: yugabyte
-    tag: 2025.2.0.0-b131 
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  provisioning:
-    annotations: *provisioningAnnotations  
-  persistence:
-    size: 25Gi  
-  # Force single replica for Yugabyte masters and tservers (override subchart defaults)
-  replicas:
-    master: 3
-    tserver: 3
-  username: yugabyte  
-  password: yugabyte
 
 kafka: &kafka
   enabled: true
@@ -150,28 +104,77 @@ kafka: &kafka
       enabled: false
     existingSecret: ""
 
-cloud_storage:
-play_http: &play_http
-  secret_key: "a-dummy-play-http-secret-key"
-schema: &schema
-    base_path: "https://{{ .Values.global.object_storage_endpoint }}/{{ .Values.global.public_container_name }}/schemas/local"
-graph_passport: &graph_passport
-  key_base: "a-dummy-graph_passport-secret-key"
-installation: &installation
-  id: ekstep
+neo4j: &neo4j
+  enabled: true
+  host: "neo4j"
+  port: 7687
+  boltPort: 8687
+  image:
+    repository: sunbirded.azurecr.io/neo4j
+    tag: "3.3.0"
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  provisioning:
+    annotations: *provisioningAnnotations
+    waitForNeo4j: "true"
+
+redis: &redis
+  enabled: true
+  nameOverride: "redis"
+  fullnameOverride: "redis"
+  auth:
+    enabled: false
+  host: "redis-master"
+  port: 6379
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  replica:
+    replicaCount: 0
+  master:
+    persistence:
+      size: 25Gi
+
+yugabyte: &yugabyte
+  enabled: true
+  nameOverride: "yugabyte"
+  fullnameOverride: "yugabyte"
+  host: "yb-tserver-service" 
+  port: 9042
+  postgresql_port: 5433
+  databases:
+    - name: "keycloak"
+    - name: "quartz"
+    - name: "userorg"
+    - name: "enc-keys"
+    - name: "registry"
+
+  image:
+    registry: yugabytedb
+    repository: yugabyte
+    tag: 2025.2.0.0-b131 
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  provisioning:
+    annotations: *provisioningAnnotations  
+  persistence:
+    size: 25Gi  
+  # Force single replica for Yugabyte masters and tservers (override subchart defaults)
+  replicas:
+    master: 3
+    tserver: 3
+  username: yugabyte  
+  password: yugabyte
+
 
 global:
-  redis: *redis
-  neo4j: *neo4j
-  kafka: *kafka
-  play_http: *play_http
-  schema: *schema
+  elasticsearch: *es
   graph_passport: *graph_passport
   installation: *installation
-  elasticsearch: *es
-  yugabyte: *yugabyte
+  kafka: *kafka
+  neo4j: *neo4j
+  play_http: *play_http
   provisioningAnnotations: *provisioningAnnotations
+  redis: *redis
+  schema: *schema
+  yugabyte: *yugabyte
 
-migration:
- yugabyte:
-   waitTime: 120

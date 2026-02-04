@@ -4,26 +4,25 @@ knowlg_automation_repo_branch: main
 provisioningAnnotations: &provisioningAnnotations
   "helm.sh/hook-weight": "-4"
 
-neo4j: &neo4j
-  enabled: true
-  host: "neo4j"
-  port: 7687
-  boltPort: 8687
-  image:
-    repository: sunbirded.azurecr.io/neo4j
-    tag: "3.3.0"
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  provisioning:
-    annotations: *provisioningAnnotations
-    waitForNeo4j: "true"
-  resources:
-    requests:
-      cpu: "500m"
-      memory: "1Gi"
-    limits:
-      cpu: "1"
-      memory: "2Gi"
+content:
+  opa_enabled: true
+
+migration:
+  yugabyte:
+    waitTime: 120
+
+# play_http: &play_http
+#   secret_key: "secretKey"
+schema: &schema
+  base_path: "https://{{ .Values.global.object_storage_endpoint }}/{{ .Values.global.public_container_name }}/schemas/local"
+graph_passport: &graph_passport
+  key_base: "secretKey"
+installation: &installation
+  id: ekstep
+channel: &channel
+  default: "in.ekstep"
+objectcategorydefinition: &objectcategorydefinition
+  keyspace: "{{ .Values.global.env }}_category_store"
 
 elasticsearch: &es
   enabled: true
@@ -60,47 +59,7 @@ elasticsearch: &es
   sysctlImage:
     registry: sunbirded.azurecr.io
     repository: bitnami-shell-archived
-    tag: 11-debian-11-r54
-
-redis: &redis
-  enabled: true
-  nameOverride: "redis"
-  fullnameOverride: "redis"
-  auth:
-    enabled: false
-  host: "redis-master"
-  port: 6379
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  replica:
-    replicaCount: 0
-  master:
-    persistence:
-      size: 25Gi
-
-yugabyte: &yugabyte
-  enabled: true
-  nameOverride: "yugabyte"
-  fullnameOverride: "yugabyte"
-  host: "yb-tserver-service" 
-  port: 9042
-  postgresql_port: 5433
-  image:
-    registry: yugabytedb
-    repository: yugabyte
-    tag: 2025.2.0.0-b131 
-  commonAnnotations:
-    "helm.sh/hook-weight": "-5"
-  provisioning:
-    annotations: *provisioningAnnotations
-  persistence:
-    size: 25Gi  
-  # Force single replica for Yugabyte masters and tservers (override subchart defaults)
-  replicas:
-    master: 3
-    tserver: 3   
-  username: yugabyte
-  password: "yugabyte"    
+    tag: 11-debian-11-r54  
 
 kafka: &kafka
   enabled: true
@@ -177,39 +136,79 @@ kafka: &kafka
       enabled: false
     existingSecret: ""
 
+neo4j: &neo4j
+  enabled: true
+  host: "neo4j"
+  port: 7687
+  boltPort: 8687
+  image:
+    repository: sunbirded.azurecr.io/neo4j
+    tag: "3.3.0"
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  provisioning:
+    annotations: *provisioningAnnotations
+    waitForNeo4j: "true"
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
 
-# play_http: &play_http
-#   secret_key: "secretKey"
-schema: &schema
-  base_path: "https://{{ .Values.global.object_storage_endpoint }}/{{ .Values.global.public_container_name }}/schemas/local"
-graph_passport: &graph_passport
-  key_base: "secretKey"
-installation: &installation
-  id: ekstep
-channel: &channel
-  default: "in.ekstep"
-objectcategorydefinition: &objectcategorydefinition
-  keyspace: "{{ .Values.global.env }}_category_store"
+redis: &redis
+  enabled: true
+  nameOverride: "redis"
+  fullnameOverride: "redis"
+  auth:
+    enabled: false
+  host: "redis-master"
+  port: 6379
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  replica:
+    replicaCount: 0
+  master:
+    persistence:
+      size: 25Gi 
+
+yugabyte: &yugabyte
+  enabled: true
+  nameOverride: "yugabyte"
+  fullnameOverride: "yugabyte"
+  host: "yb-tserver-service" 
+  port: 9042
+  postgresql_port: 5433
+  image:
+    registry: yugabytedb
+    repository: yugabyte
+    tag: 2025.2.0.0-b131 
+  commonAnnotations:
+    "helm.sh/hook-weight": "-5"
+  provisioning:
+    annotations: *provisioningAnnotations
+  persistence:
+    size: 25Gi  
+  # Force single replica for Yugabyte masters and tservers (override subchart defaults)
+  replicas:
+    master: 3
+    tserver: 3   
+  username: yugabyte
+  password: "yugabyte" 
 
 global:
-  redis: *redis
+  channel: *channel
   elasticsearch: *es
-  neo4j: *neo4j
-  yugabyte: *yugabyte
-  kafka: *kafka
-  # play_http: *play_http
-  schema: *schema
   graph_passport: *graph_passport
   installation: *installation
-  channel: *channel
-  objectcategorydefinition: *objectcategorydefinition
-  provisioningAnnotations: *provisioningAnnotations
+  kafka: *kafka
   keycloak_kid_keys_configmap: keycloak-kids-keys
   kong_desktop_device_consumer_names_for_opa: '["portal", "desktop"]'
-
-content:
-  opa_enabled: true
-
-migration:
-  yugabyte:
-    waitTime: 120
+  neo4j: *neo4j
+  objectcategorydefinition: *objectcategorydefinition
+  provisioningAnnotations: *provisioningAnnotations
+  redis: *redis
+  schema: *schema
+  yugabyte: *yugabyte
+  # play_http: *play_http

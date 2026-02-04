@@ -1,6 +1,22 @@
 replicaCount: 1
 fullname: monitoring
 
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      retention: "30d"
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 25Gi
+  grafana:
+    env:
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SERVER_ROOT_URL: http://example.com/grafana/
+
 loki:
   loki:
     auth_enabled: false
@@ -29,19 +45,3 @@ loki:
     replicas: 1
     persistence:
       size: 25Gi
-
-kube-prometheus-stack:
-  prometheus:
-    prometheusSpec:
-      retention: "30d"
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 25Gi
-  grafana:
-    env:
-      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
-      GF_SERVER_ROOT_URL: http://example.com/grafana/
