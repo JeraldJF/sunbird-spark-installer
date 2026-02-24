@@ -99,4 +99,4 @@ will get the jar from https://github.com/Sunbird-Knowlg/knowledge-platform-db-ex
 
 Update the JanusGraph image tag in `helmcharts/images.yaml` after building and pushing your custom image.
 
----
+----
