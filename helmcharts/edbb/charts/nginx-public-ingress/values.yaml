@@ -233,4 +233,4 @@ smtp:
   user: <update the user> # e.g. your_email@gmail.com
   pass: "<app password>" # e.g. your_app_password
   from: <update the from mail> # e.g. your_email@gmail.com
-  to: <update the to mail> # e.g. your_email@gmail.com
+  to: dummysender111@gmail.com # e.g. your_email@gmail.com
