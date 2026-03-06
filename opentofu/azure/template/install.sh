@@ -290,6 +290,27 @@ else
         shift
         install_component "$1"
         ;;
+    "upgrade_service")
+        # Usage: ./install.sh upgrade_service <component> <image_key> <new_tag>
+        # Example: ./install.sh upgrade_service edbb player.image.tag v1.2.3
+        shift
+        component="$1"
+        image_key="$2"
+        new_tag="$3"
+        local current_directory="$(pwd)"
+        if [ "$(basename $current_directory)" != "helmcharts" ]; then
+            cd ../../../helmcharts 2>/dev/null || true
+        fi
+        echo "Upgrading $image_key to $new_tag in release $component..."
+        helm upgrade "$component" "$component" --namespace sunbird \
+            -f "$component/values.yaml" \
+            -f images.yaml \
+            -f "global-resources.yaml" \
+            -f "../opentofu/azure/$environment/global-values.yaml" \
+            -f "../opentofu/azure/$environment/global-cloud-values.yaml" \
+            --set "$image_key=$new_tag" \
+            --timeout 30m --debug
+        ;;
     "install_helm_components")
         install_helm_components
         ;;
