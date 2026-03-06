@@ -9,16 +9,7 @@
     <#elseif section = "form">
         <div id="kc-info-message">
 <!--           <p class="instruction">${message.summary}<#if requiredActions??><#list requiredActions>: <b><#items as reqActionItem>${msg("requiredAction.${reqActionItem}")}<#sep>, </#items></b></#list><#else></#if></p> -->
-             <#if requiredActions?? && requiredActions?seq_contains("UPDATE_PASSWORD")>
-               <div class="password-update-success">
-                 <p>${msg("passwordUpdatedMessage")}</p>
-                 <#if pageRedirectUri??>
-                   <p><a href="${pageRedirectUri}" class="kc-button">${kcSanitize(msg("backToApplication"))?no_esc}</a></p>
-                 <#elseif client.baseUrl??>
-                   <p><a href="${client.baseUrl}" class="kc-button">${kcSanitize(msg("backToApplication"))?no_esc}</a></p>
-                 </#if>
-               </div>
-             <#elseif skipLink??>
+             <#if skipLink??>
              <#else>
                <#if actionUri??>
                  <style>body { visibility: hidden !important; }</style>
