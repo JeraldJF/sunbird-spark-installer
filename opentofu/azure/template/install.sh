@@ -297,7 +297,7 @@ else
         component="$1"
         image_key="$2"
         new_tag="$3"
-        local current_directory="$(pwd)"
+        current_directory="$(pwd)"
         if [ "$(basename $current_directory)" != "helmcharts" ]; then
             cd ../../../helmcharts 2>/dev/null || true
         fi
