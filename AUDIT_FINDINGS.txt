@@ -1,0 +1,183 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║         OPENTOFU/TERRAFORM VERSION AUDIT - SUNBIRD SPARK INSTALLER         ║
+║                                                                            ║
+║                      Generated: 2026-03-11                                 ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+📋 AUDIT SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Total Terraform/OpenTofu Files Scanned: 44
+  Total Modules Analyzed: 16
+  Lock Files Found: 2
+  CI/CD Workflows Checked: 1
+
+
+🎯 KEY FINDING: "What version will run in production?"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ❌ ANSWER: UNKNOWN - UNCONTROLLED
+
+    • OpenTofu Binary: System-installed version (any >= 1.0)
+    • Provider Versions: Latest satisfying constraints (-upgrade flag)
+    • Reproducibility: NOT GUARANTEED
+    • Consistency Across Runs: NOT GUARANTEED
+    • Lock File Status: EMPTY (not populated)
+
+
+📊 SUMMARY STATISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Modules with Version Constraints:    11/16 (69%)  ✅ Partial
+  Modules WITHOUT Constraints:          5/16 (31%)  ❌ Missing
+  
+  Azure Provider Constraint:           ~> 4.0       ✅ Defined
+  Google Provider Constraint:          ~> 5.0       ⚠️  1 module only
+  Root Module Constraint:              MISSING      ❌ Critical
+  Lock Files Populated:                NO           ❌ Critical
+
+
+⚠️  RISK ASSESSMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Overall Risk Level:                  🔴 HIGH
+
+  Critical Issues:
+    1. 🔴 No root module required_version constraint
+    2. 🔴 -upgrade flag causes uncontrolled provider updates
+    3. ⚠️  Lock files are empty (not populated)
+    4. ⚠️  5 GCP modules have implicit provider dependencies
+    5. 🟡 TLS provider has no version constraint
+    6. 🟡 DIAL addon constraint differs from main modules (4.0.1 vs 4.0)
+
+
+📁 PROVIDER VERSION CONSTRAINTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  PROVIDER          CONSTRAINT    MODULES      STATUS
+  ──────────────────────────────────────────────────────
+  azurerm           ~> 4.0        4 modules    ✅ Defined
+  azurerm           ~> 4.0.1      1 addon      ⚠️  Stricter (DIAL)
+  google            ~> 5.0        1 module     ⚠️  4 others implicit
+  local             ~> 2.5        4 modules    ✅ Consistent
+  random            ~> 3.6        2 modules    ✅ Consistent
+  null              ~> 3.2        3 modules    ✅ Consistent
+  tls               (NONE)        2 modules    ❌ Latest always
+
+
+🚀 DEPLOYMENT METHOD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Binary Used:       tofu init -upgrade
+  Runner:            Bash script (no Docker isolation)
+  CI/CD Pipeline:    No version pinning detected
+  Version Spec:      NOT SPECIFIED (uses system default)
+  Environment:       Depends on local system
+  Reproducibility:   ❌ Not guaranteed
+
+
+🔍 MODULES ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  AZURE MODULES (7):
+    ✅ opentofu/azure/modules/aks              - azurerm ~> 4.0
+    ✅ opentofu/azure/modules/network          - azurerm ~> 4.0
+    ✅ opentofu/azure/modules/storage          - azurerm ~> 4.0
+    ✅ opentofu/azure/modules/output-file      - local ~> 2.5, null ~> 3.2
+    ✅ opentofu/azure/modules/upload-files     - local ~> 2.5, null ~> 3.2
+    ✅ opentofu/azure/modules/random_passwords - local/random/null
+    ❌ opentofu/azure/modules/keys             - NO CONSTRAINTS (tls implicit)
+
+  GCP MODULES (8):
+    ❌ opentofu/gcp/modules/gke                - NO CONSTRAINTS (google implicit)
+    ❌ opentofu/gcp/modules/network            - NO CONSTRAINTS (google implicit)
+    ❌ opentofu/gcp/modules/service-account    - NO CONSTRAINTS (google implicit)
+    ❌ opentofu/gcp/modules/storage            - NO CONSTRAINTS (google implicit)
+    ❌ opentofu/gcp/modules/upload-files       - NO CONSTRAINTS (local implicit)
+    ❌ opentofu/gcp/modules/output-file        - NO CONSTRAINTS (local implicit)
+    ✅ opentofu/gcp/modules/random_passwords   - google ~> 5.0
+    ❌ opentofu/gcp/modules/keys               - NO CONSTRAINTS (tls implicit)
+
+  ADDON MODULES (1):
+    ⚠️  addons/dial/opentofu/azure/storage     - azurerm ~> 4.0.1 (stricter)
+
+
+💾 LOCK FILE STATUS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  opentofu/azure/template/.opentofu.lock.hcl  - EXISTS but EMPTY
+  opentofu/gcp/template/.opentofu.lock.hcl    - EXISTS but EMPTY
+
+  Lock Status:  ❌ NOT POPULATED
+  Impact:       Provider versions are not locked/reproducible
+  Fix:          Run 'tofu init' and commit lock files
+
+
+🎯 IMMEDIATE ACTIONS REQUIRED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  [ ] 1. Create opentofu/azure/template/main.tf with required_version block
+  [ ] 2. Create opentofu/gcp/template/main.tf with required_version block
+  [ ] 3. Remove -upgrade flag from both install.sh scripts
+  [ ] 4. Run 'tofu init' in both template directories
+  [ ] 5. Commit .opentofu.lock.hcl files to repository
+  [ ] 6. Align DIAL addon constraint to ~> 4.0 (from 4.0.1)
+  [ ] 7. Add terraform blocks to GCP modules with google provider constraint
+
+  Estimated Time:  ~20 minutes
+  Difficulty:      🟢 EASY
+  Impact:          🔴 CRITICAL
+
+
+📚 DOCUMENTATION PROVIDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. TERRAFORM_VERSION_AUDIT_REPORT.md (17 KB)
+     → Comprehensive 11-section audit with detailed analysis
+     → Includes risk assessment, recommendations, implementation checklist
+
+  2. terraform_audit_report.json (9.9 KB)
+     → Machine-readable JSON format
+     → Suitable for automation, dashboards, monitoring
+
+  3. IaC_VERSION_AUDIT_SUMMARY.md (4.5 KB)
+     → Quick reference guide
+     → FAQ and immediate action items
+
+  4. AUDIT_FINDINGS.txt (this file)
+     → Visual summary of key findings
+
+
+✅ NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  SHORT TERM (Today):
+    • Review IaC_VERSION_AUDIT_SUMMARY.md for quick overview
+    • Execute "Immediate Actions Required" section above
+    • Test deployment with locked provider versions
+
+  MEDIUM TERM (1-2 weeks):
+    • Add explicit provider constraints to all GCP modules
+    • Create terraform validation in CI/CD pipeline
+    • Document provider version upgrade policy
+
+  LONG TERM (1-3 months):
+    • Implement Docker-based OpenTofu deployments
+    • Migrate to Terraform Registry for module versioning
+    • Establish semantic versioning for modules
+
+
+📞 QUESTIONS?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  See TERRAFORM_VERSION_AUDIT_REPORT.md Section 11 "Appendix: FAQ"
+  for detailed answers to common questions.
+
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         AUDIT COMPLETE                                    ║
+║                    Risk Level: 🔴 HIGH - ACTION NEEDED                     ║
+╚════════════════════════════════════════════════════════════════════════════╝

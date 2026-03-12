@@ -1,0 +1,323 @@
+{
+  "report_generated": "2026-03-11T18:23:31.244619",
+  "repository": "sunbird-spark-installer",
+  "iac_tool": "OpenTofu (Terraform-compatible)",
+  "runtime_detection": {
+    "binary_used": "OpenTofu",
+    "invocation_method": "tofu init -upgrade in install.sh",
+    "files": [
+      "opentofu/azure/template/install.sh:23",
+      "opentofu/gcp/template/install.sh (similar structure)"
+    ],
+    "version_specified": "Not explicitly pinned - uses latest available",
+    "deployment_runner": "Bash script - no containerized runtime detected",
+    "notes": "No CI/CD pipeline found with explicit version pinning"
+  },
+  "module_summary": {
+    "total_modules": 16,
+    "modules_with_constraints": 11,
+    "modules_without_constraints": 5,
+    "by_provider": {
+      "azurerm": {
+        "count": 6,
+        "versions": [
+          "~> 4.0",
+          "~> 4.0.1"
+        ]
+      },
+      "google": {
+        "count": 1,
+        "versions": [
+          "~> 5.0"
+        ]
+      },
+      "local": {
+        "count": 4,
+        "versions": [
+          "~> 2.5"
+        ]
+      },
+      "random": {
+        "count": 2,
+        "versions": [
+          "~> 3.6"
+        ]
+      },
+      "null": {
+        "count": 3,
+        "versions": [
+          "~> 3.2"
+        ]
+      },
+      "tls": {
+        "count": 1,
+        "versions": [
+          "no version constraint"
+        ]
+      }
+    }
+  },
+  "modules": [
+    {
+      "path": "opentofu/azure/modules/aks",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "azurerm": "~> 4.0"
+      },
+      "lock_file": false,
+      "notes": "AKS cluster creation module"
+    },
+    {
+      "path": "opentofu/azure/modules/network",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "azurerm": "~> 4.0"
+      },
+      "lock_file": false,
+      "notes": "VNet and networking module"
+    },
+    {
+      "path": "opentofu/azure/modules/storage",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "azurerm": "~> 4.0"
+      },
+      "lock_file": false,
+      "notes": "Azure storage account module"
+    },
+    {
+      "path": "opentofu/azure/modules/output-file",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "local": "~> 2.5",
+        "null": "~> 3.2"
+      },
+      "lock_file": false,
+      "notes": "Template file generation module"
+    },
+    {
+      "path": "opentofu/azure/modules/upload-files",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "local": "~> 2.5",
+        "null": "~> 3.2"
+      },
+      "lock_file": false,
+      "notes": "File upload to storage module"
+    },
+    {
+      "path": "opentofu/azure/modules/random_passwords",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "local": "~> 2.5",
+        "random": "~> 3.6",
+        "null": "~> 3.2"
+      },
+      "lock_file": false,
+      "notes": "Random password generation module"
+    },
+    {
+      "path": "opentofu/azure/modules/keys",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "Key generation - uses tls provider (no constraint) and local-exec"
+    },
+    {
+      "path": "opentofu/gcp/modules/gke",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "GKE cluster creation - uses google provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/network",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "GCP VPC and networking - uses google provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/service-account",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "GCP service account - uses google provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/storage",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "GCS bucket storage - uses google provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/upload-files",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "File upload to GCS - uses local provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/output-file",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "Template generation - uses local provider implicitly"
+    },
+    {
+      "path": "opentofu/gcp/modules/random_passwords",
+      "type": "root",
+      "required_version": null,
+      "providers": {
+        "google": "~> 5.0"
+      },
+      "lock_file": false,
+      "notes": "Random password generation"
+    },
+    {
+      "path": "opentofu/gcp/modules/keys",
+      "type": "root",
+      "required_version": null,
+      "providers": {},
+      "lock_file": false,
+      "notes": "Key generation - uses tls provider (no constraint)"
+    },
+    {
+      "path": "addons/dial/opentofu/azure/storage",
+      "type": "addon",
+      "required_version": null,
+      "providers": {
+        "azurerm": "~> 4.0.1",
+        "null": "~> 3.2"
+      },
+      "lock_file": false,
+      "notes": "DIAL addon storage container - more specific azurerm version"
+    }
+  ],
+  "lock_files": {
+    "azure_template": {
+      "path": "opentofu/azure/template/.opentofu.lock.hcl",
+      "exists": true,
+      "content": "EMPTY - only header present",
+      "status": "Lock files not populated - providers not yet initialized"
+    },
+    "gcp_template": {
+      "path": "opentofu/gcp/template/.opentofu.lock.hcl",
+      "exists": true,
+      "content": "EMPTY - only header present",
+      "status": "Lock files not populated - providers not yet initialized"
+    }
+  },
+  "effective_deployment_version": {
+    "terraform_binary": "OpenTofu",
+    "version_constraint": "No explicit constraint - uses latest",
+    "deployment_method": "Direct invocation: tofu init -upgrade",
+    "compatibility": "Unknown - depends on system/environment OpenTofu version",
+    "recommendation": "CRITICAL: Define required_version constraint at root module"
+  },
+  "risks_and_observations": [
+    {
+      "severity": "HIGH",
+      "issue": "No root module terraform block with required_version",
+      "modules_affected": [
+        "Root modules in both Azure and GCP templates"
+      ],
+      "impact": "Any OpenTofu version >=1.0 may be used, risking backward/forward incompatibilities",
+      "recommendation": "Add terraform block with required_version constraint at root"
+    },
+    {
+      "severity": "MEDIUM",
+      "issue": "Empty lock files (.opentofu.lock.hcl)",
+      "modules_affected": [
+        "Both Azure and GCP templates"
+      ],
+      "impact": "Providers are not locked - each init may pull different versions",
+      "recommendation": "Run 'tofu init' and commit lock files to repository"
+    },
+    {
+      "severity": "MEDIUM",
+      "issue": "Inconsistent provider constraints across modules",
+      "modules_affected": [
+        "azurerm: ~>4.0 vs ~>4.0.1 in dial addon"
+      ],
+      "impact": "DIAL addon has stricter constraint than main modules",
+      "recommendation": "Standardize provider versions across all modules"
+    },
+    {
+      "severity": "MEDIUM",
+      "issue": "Implicit provider dependencies",
+      "modules_affected": [
+        "GCP modules: gke, network, service-account, storage"
+      ],
+      "impact": "No explicit provider version constraints in most GCP modules",
+      "recommendation": "Add explicit terraform blocks with required_providers to all modules"
+    },
+    {
+      "severity": "LOW",
+      "issue": "No CI/CD version pinning",
+      "modules_affected": [
+        "install.sh scripts"
+      ],
+      "impact": "Deployment depends on locally installed OpenTofu version",
+      "recommendation": "Use Docker image with pinned OpenTofu version for consistent deployments"
+    },
+    {
+      "severity": "LOW",
+      "issue": "tls provider - no version constraint",
+      "modules_affected": [
+        "azure/modules/keys, gcp/modules/keys"
+      ],
+      "impact": "Latest tls provider will be used",
+      "recommendation": "Add version constraint like ~> 4.0 to tls provider"
+    }
+  ],
+  "recommendations": {
+    "immediate_actions": [
+      {
+        "priority": 1,
+        "action": "Add root module terraform block",
+        "details": "Create/update opentofu/azure/template/main.tf and opentofu/gcp/template/main.tf with required_version constraint",
+        "example": "terraform {\n  required_version = \">= 1.5.0\"\n  required_providers { ... }\n}"
+      },
+      {
+        "priority": 2,
+        "action": "Initialize and commit lock files",
+        "details": "Run 'tofu init' in template directories and commit .opentofu.lock.hcl files",
+        "command": "cd opentofu/azure/template && tofu init && git add .opentofu.lock.hcl"
+      },
+      {
+        "priority": 3,
+        "action": "Standardize provider constraints",
+        "details": "Review and align all provider version constraints across modules",
+        "example": "azurerm: all use ~> 4.0, dial addon aligns with ~> 4.0"
+      }
+    ],
+    "medium_term_improvements": [
+      "Add explicit provider constraints to all modules (currently some implicitly inherit)",
+      "Use terraform workspace to manage multiple deployments",
+      "Implement pre-deployment validation with 'tofu validate'",
+      "Create centralized versions.tf at root level for all provider requirements",
+      "Use GitHub Actions or similar to pin OpenTofu version in CI/CD"
+    ],
+    "long_term_strategy": [
+      "Migrate to module registry or Terraform Cloud for version management",
+      "Implement semantic versioning for modules (v1.0.0, v1.1.0, etc.)",
+      "Establish provider upgrade policy (e.g., upgrade monthly)",
+      "Document compatibility matrix: OpenTofu version \u00d7 Provider versions"
+    ]
+  }
+}
