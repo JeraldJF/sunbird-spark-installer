@@ -119,7 +119,7 @@ spec:
 
             # Run sunbird-lern specific SQL migrations against sunbird database
             echo "Running sunbird-lern SQL migrations..."
-            cd /opt/migrations/sunbird-yugabyte-migrations/sunbird-lern
+            cd /opt/migrations/sunbird-yugabyte-migrations/sunbird-lern/reports
             for sql_file in *.sql; do
               echo "Applying $sql_file to sunbird..."
               run_sql_file "$sql_file" "sunbird" || true
