@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.job.namespace }}
+  labels:
+    app: migration
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+data:
+  # Cassandra to YugabyteDB migration script (PySpark)
+  cassandra_to_yugabyte.py: |
+{{ tpl (.Files.Get "files/cassandra_to_yugabyte.py") . | indent 4 }}
+
+  # PostgreSQL to YugabyteDB migration script (SQL dump/restore)
+  postgres_dump_restore.sh: |
+{{ tpl (.Files.Get "files/postgres_dump_restore.sh") . | indent 4 }}
+
+  # Neo4j to JanusGraph migration script (Direct streaming)
+  neo4j_to_janusgraph.py: |
+{{ tpl (.Files.Get "files/neo4j_to_janusgraph.py") . | indent 4 }}
