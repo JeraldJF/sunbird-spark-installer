@@ -165,6 +165,7 @@ certificatesign:
   enabled: true
 
 global:
+  migration: false
   elasticsearch: *es
   kafka: *kafka
   keycloak_key_configmap: keycloak-key

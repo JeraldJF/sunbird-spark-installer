@@ -77,5 +77,6 @@ yugabyte: &yugabyte
   password: yugabyte
 
 global:
+  migration: false
   kafka: *kafka
   yugabyte: *yugabyte

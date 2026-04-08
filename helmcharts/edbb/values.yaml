@@ -160,6 +160,7 @@ knowledgemw:
   enabled: true
 
 global:
+  migration: false
   kafka: *kafka
   keycloak_key_configmap: keycloak-key
   keycloak_kid_keys_configmap: keycloak-kids-keys
