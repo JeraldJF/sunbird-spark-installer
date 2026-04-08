@@ -199,7 +199,7 @@ flink:
   enabled: true
 
 global:
-  migration: false
+  migration: true
   channel: *channel
   elasticsearch: *es
   graph_passport: *graph_passport
