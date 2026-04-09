@@ -9,7 +9,7 @@ certregistry:
   opa_enabled: true
 lern:
   enabled: true
-  opa_enabled: true
+  opa_enabled: false
 registry:
   enabled: true
   opa_enabled: false
