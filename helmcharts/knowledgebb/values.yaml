@@ -7,7 +7,7 @@ channel: &channel
 
 knowlg:
   enabled: true
-  opa_enabled: true
+  opa_enabled: false
 
 provisioningAnnotations: &provisioningAnnotations
   "helm.sh/hook-weight": "-4"
