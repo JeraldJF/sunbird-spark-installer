@@ -19,8 +19,8 @@ kong_apis:
     config.allowed_payload_size: "{{ .Values.small_request_size_limit }}"
 
 - name: telemetry
-  uris: "{{ .Values.data_service_prefix }}/v1/telemetry"
-  url: "{{ .Values.telemetry_service_url }}/v1/telemetry"
+  uris: "{{ .Values.data_service_prefix }}/v3/telemetry"
+  url: "{{ .Values.telemetry_service_url }}/v3/telemetry"
   strip_path: true
   plugins:
   - name: jwt
