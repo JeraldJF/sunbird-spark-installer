@@ -18,7 +18,7 @@ kong_apis:
   - name: request-size-limiting
     config.allowed_payload_size: "{{ .Values.small_request_size_limit }}"
 
-- name: telemetry
+- name: telemetryv3
   uris: "{{ .Values.data_service_prefix }}/v3/telemetry"
   url: "{{ .Values.telemetry_service_url }}/v1/telemetry"
   strip_path: true
