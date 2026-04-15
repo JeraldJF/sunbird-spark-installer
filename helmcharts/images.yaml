@@ -83,7 +83,7 @@ images:
 
   adminutil: &adminutil
     repository: "ghcr.io/sunbird-lern/sunbird-apimanager-util"
-    tag: ":spark-v1.0.0_b8f4778_3"
+    tag: "spark-v1.0.0_b8f4778_3"
 
   cert: &cert
     repository: "ghcr.io/sunbird-lern/cert-service"
