@@ -16,7 +16,400 @@
         },
         {
           "name": "Creation",
-          "item": []
+          "item": [
+            {
+              "name": "1. Resource Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"action\": \"create\",\n        \"subType\": \"resource\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"type\": \"content\",\n        \"popup\": true,\n        \"editMode\": true,\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"create\",\n            \"fields\": [\n                {\n                    \"code\": \"name\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Name\",\n                    \"label\": \"Name\",\n                    \"description\": \"Name\",\n                    \"editable\": true,\n                    \"placeholder\": \"Name\",\n                    \"inputType\": \"text\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"index\": 1\n                },\n                {\n                    \"code\": \"board\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Board\",\n                    \"label\": \"Board\",\n                    \"description\": \"Education Board (Like MP Board, NCERT, etc)\",\n                    \"editable\": true,\n                    \"placeholder\": \"Board\",\n                    \"inputType\": \"select\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 2,\n                    \"depends\": [\n                        \"medium\"\n                    ]\n                },\n                {\n                    \"code\": \"medium\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Medium\",\n                    \"label\": \"Medium\",\n                    \"description\": \"Medium of instruction\",\n                    \"editable\": true,\n                    \"placeholder\": \"Medium\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 3,\n                    \"depends\": [\n                        \"gradeLevel\"\n                    ]\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Grade\",\n                    \"label\": \"Grade\",\n                    \"description\": \"Grade\",\n                    \"editable\": true,\n                    \"placeholder\": \"Grade\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 4,\n                    \"depends\": [\n                        \"subject\"\n                    ]\n                },\n                {\n                    \"code\": \"subject\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Subject\",\n                    \"label\": \"Subject\",\n                    \"description\": \"Subject of the Content to use to teach\",\n                    \"editable\": true,\n                    \"placeholder\": \"Grade\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 5\n                },\n                {\n                    \"code\": \"concept\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Concept\",\n                    \"label\": \"Concepts\",\n                    \"description\": \"Concept\",\n                    \"editable\": true,\n                    \"placeholder\": \"Concept\",\n                    \"inputType\": \"Concept\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 6\n                },\n                {\n                    \"code\": \"resourceType\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Resource Type\",\n                    \"label\": \"Resource Type\",\n                    \"description\": \"Resourcetype\",\n                    \"editable\": true,\n                    \"placeholder\": \"Resource Type\",\n                    \"inputType\": \"select\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 7,\n                    \"range\": [\n                        {\n                            \"key\": \"Teach\",\n                            \"name\": \"Teach\"\n                        },\n                        {\n                            \"key\": \"Practice\",\n                            \"name\": \"Practice\"\n                        },\n                        {\n                            \"key\": \"Learn\",\n                            \"name\": \"Learn\"\n                        },\n                        {\n                            \"key\": \"Test\",\n                            \"name\": \"Test\"\n                        },\n                        {\n                            \"key\": \"Play\",\n                            \"name\": \"Play\"\n                        },\n                        {\n                            \"key\": \"Read\",\n                            \"name\": \"Read\"\n                        },\n                        {\n                            \"key\": \"Experiment\",\n                            \"name\": \"Experiment\"\n                        }\n                    ]\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "2. Resource Save",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"action\": \"save\",\n        \"subType\": \"resource\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"type\": \"content\",\n        \"popup\": true,\n        \"editMode\": true,\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"save\",\n            \"fields\": [\n                {\n                    \"code\": \"appicon\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"url\",\n                    \"renderingHints\": {},\n                    \"name\": \"App Icon\",\n                    \"description\": \"App Icon\",\n                    \"index\": 1,\n                    \"inputType\": \"file\",\n                    \"label\": \"Icon\",\n                    \"placeholder\": \"App Icon\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"name\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Title\",\n                    \"description\": \"Title of the content\",\n                    \"index\": 2,\n                    \"inputType\": \"text\",\n                    \"label\": \"Title\",\n                    \"placeholder\": \"Enter Title For Book\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"description\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Description\",\n                    \"description\": \"Brief description\",\n                    \"index\": 3,\n                    \"inputType\": \"textarea\",\n                    \"label\": \"Description\",\n                    \"placeholder\": \"Brief description about the Book\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"board\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"medium\",\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"Board\",\n                    \"index\": 5,\n                    \"label\": \"Board/Syllabus\",\n                    \"required\": false,\n                    \"name\": \"Board/Syllabus\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Board/Syllabus\"\n                },\n                {\n                    \"code\": \"medium\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 6,\n                    \"label\": \"Medium\",\n                    \"required\": false,\n                    \"name\": \"medium\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Medium\"\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"Class\",\n                    \"index\": 7,\n                    \"label\": \"Class\",\n                    \"required\": false,\n                    \"name\": \"Class\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Class\"\n                },\n                {\n                    \"code\": \"subject\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 8,\n                    \"label\": \"Subject\",\n                    \"required\": false,\n                    \"name\": \"Subject\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Subject\"\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "3. Resource Review",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"action\": \"review\",\n        \"subType\": \"resource\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"type\": \"content\",\n        \"popup\": true,\n        \"editMode\": true,\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"review\",\n            \"fields\": [\n                {\n                    \"code\": \"appicon\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"url\",\n                    \"renderingHints\": {},\n                    \"name\": \"App Icon\",\n                    \"description\": \"App Icon\",\n                    \"index\": 1,\n                    \"inputType\": \"file\",\n                    \"label\": \"Icon\",\n                    \"placeholder\": \"App Icon\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"name\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Title\",\n                    \"description\": \"Title of the content\",\n                    \"index\": 2,\n                    \"inputType\": \"text\",\n                    \"label\": \"Title\",\n                    \"placeholder\": \"Enter Title For Book\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"description\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Description\",\n                    \"description\": \"Brief description\",\n                    \"index\": 3,\n                    \"inputType\": \"textarea\",\n                    \"label\": \"Description\",\n                    \"placeholder\": \"Brief description about the Book\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"board\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"medium\",\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"Board\",\n                    \"index\": 5,\n                    \"label\": \"Board/Syllabus\",\n                    \"required\": false,\n                    \"name\": \"Board/Syllabus\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Board/Syllabus\"\n                },\n                {\n                    \"code\": \"medium\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 6,\n                    \"label\": \"Medium\",\n                    \"required\": false,\n                    \"name\": \"medium\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Medium\"\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"Class\",\n                    \"index\": 7,\n                    \"label\": \"Class\",\n                    \"required\": false,\n                    \"name\": \"Class\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Class\"\n                },\n                {\n                    \"code\": \"subject\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 8,\n                    \"label\": \"Subject\",\n                    \"required\": false,\n                    \"name\": \"Subject\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Subject\"\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "4. Resource Publish",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"action\": \"publish\",\n        \"type\": \"content\",\n        \"subType\": \"resource\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"review\",\n            \"fields\": [\n                {\n                    \"contents\": [\n                        {\n                            \"name\": \"Appropriateness\",\n                            \"checkList\": [\n                                \"Is suitable for children\"\n                            ]\n                        },\n                        {\n                            \"name\": \"Content details\",\n                            \"checkList\": [\n                                \"Appropriate Title, Description\"\n                            ]\n                        },\n                        {\n                            \"name\": \"Usability\",\n                            \"checkList\": [\n                                \"Content plays correctly\"\n                            ]\n                        }\n                    ],\n                    \"title\": \"Please confirm that ALL the following items are verified (by ticking the check-boxes) before you can publish:\"\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "5. Resource Request for changes",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\":\n    {\n            \"type\": \"content\",\n            \"subType\": \"resource\",\n            \"action\": \"requestforchanges\",\n            \"component\": \"*\",\n            \"framework\": \"*\",\n            \"data\": {\n                \"templateName\": \"defaultTemplate\",\n                \"action\": \"requestforchanges\",\n                \"fields\": [\n                    {\n                        \"otherReason\": \"Other Issue(s) (if there are any other issues, tick this and provide details in the comments box)\",\n                        \"contents\": [\n                            {\n                                \"name\": \"Appropriateness\",\n                                \"checkList\": [\n                                    \"Incorrect Board, Grade, Subject or Medium\"\n                                ]\n                            },\n                            {\n                                \"name\": \"Content details\",\n                                \"checkList\": [\n                                    \"Inappropriate tags such as Resource Type or Concepts\",\n                                    \"Irrelevant Keywords\"\n                                ]\n                            },\n                            {\n                                \"name\": \"Usability\",\n                                \"checkList\": [\n                                    \"Content is NOT playing correctly\",\n                                    \"Spelling mistakes found in text used\"\n                                ]\n                            }\n                        ],\n                        \"title\": \"Please tick the reasons for requesting changes and provide detailed comments:\"\n                    }\n                ]\n            },\n            \"rootOrgId\": \"*\"\n        }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "6. Assessment Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"type\": \"content\",\n        \"subType\": \"assessment\",\n        \"action\": \"create\",\n        \"component\": \"*\",\n        \"framework\": \"*\",\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"create\",\n            \"fields\": [\n                {\n                    \"code\": \"name\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"displayProperty\": \"Editable\",\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"description\": \"Name\",\n                    \"index\": 1,\n                    \"label\": \"Name\",\n                    \"required\": false,\n                    \"name\": \"Name\",\n                    \"inputType\": \"text\",\n                    \"placeholder\": \"Name\"\n                },\n                {\n                    \"code\": \"maxAttempts\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Max no of attempts\",\n                    \"label\": \"Max no of attempts\",\n                    \"description\": \"Max no of attempts\",\n                    \"editable\": true,\n                    \"placeholder\": \"Max no of attempts\",\n                    \"inputType\": \"number\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 6\n                }\n            ]\n        },\n        \"rootOrgId\": \"*\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "7. Assessment Filter",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"type\": \"content\",\n        \"subType\": \"questions\",\n        \"action\": \"question-filter-view\",\n        \"component\": \"*\",\n        \"framework\": \"*\",\n        \"data\": {\n            \"templateName\": \"filterMetaDataTemplate\",\n            \"action\": \"question-filter-view\",\n            \"fields\": [\n                {\n                    \"code\": \"primaryCategory\",\n                    \"dataType\": \"text\",\n                    \"description\": \"Collection Type\",\n                    \"editable\": false,\n                    \"index\": 0,\n                    \"inputType\": \"text\",\n                    \"label\": \"Collection Type\",\n                    \"name\": \"Collection Type\",\n                    \"placeholder\": \"\",\n                    \"required\": true,\n                    \"visible\": true\n                },\n                {\n                    \"code\": \"additionalCategories\",\n                    \"dataType\": \"list\",\n                    \"description\": \"Additonal Category of the Content\",\n                    \"editable\": true,\n                    \"index\": 1,\n                    \"inputType\": \"multiselect\",\n                    \"label\": \"Additional Category\",\n                    \"name\": \"Additional Category\",\n                    \"placeholder\": \"Select Additional Category\",\n                    \"renderingHints\": {},\n                    \"range\": [\n                        \"Textbook\",\n                        \"Lesson Plan\"\n                    ],\n                    \"required\": false,\n                    \"visible\": true\n                },\n                {\n                    \"code\": \"name\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Name\",\n                    \"description\": \"Name of the content\",\n                    \"inputType\": \"text\",\n                    \"label\": \"Name\",\n                    \"placeholder\": \"Name\",\n                    \"required\": true,\n                    \"validation\": [\n                        {\n                            \"type\": \"max\",\n                            \"message\": \"Input is Exceded\",\n                            \"value\": \"120\"\n                        }\n                    ]\n                },\n                {\n                    \"code\": \"description\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Description\",\n                    \"description\": \"Brief description\",\n                    \"inputType\": \"textarea\",\n                    \"label\": \"Description\",\n                    \"placeholder\": \"Description\",\n                    \"required\": false,\n                    \"validation\": [\n                        {\n                            \"type\": \"max\",\n                            \"message\": \"Input is Exceded\",\n                            \"value\": \"1000\"\n                        }\n                    ]\n                },\n                {\n                    \"code\": \"keywords\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"name\": \"Keywords\",\n                    \"description\": \"Keywords for the content\",\n                    \"inputType\": \"keywordsuggestion\",\n                    \"label\": \"keywords\",\n                    \"placeholder\": \"Enter Keywords\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"appicon\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"url\",\n                    \"renderingHints\": {},\n                    \"name\": \"App Icon\",\n                    \"description\": \"App Icon\",\n                    \"index\": 6,\n                    \"inputType\": \"file\",\n                    \"label\": \"Icon\",\n                    \"placeholder\": \"App Icon\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"board\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"gradeLevel\",\n                        \"medium\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"Board\",\n                    \"index\": 0,\n                    \"label\": \"Board/Syllabus\",\n                    \"required\": true,\n                    \"name\": \"Board/Syllabus\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Board/Syllabus\"\n                },\n                {\n                    \"code\": \"medium\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 1,\n                    \"label\": \"medium\",\n                    \"required\": true,\n                    \"name\": \"medium\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Medium\"\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"Class\",\n                    \"index\": 2,\n                    \"label\": \"Class\",\n                    \"required\": true,\n                    \"name\": \"Class\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Class\"\n                },\n                {\n                    \"code\": \"subject\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 3,\n                    \"label\": \"Subject\",\n                    \"required\": true,\n                    \"name\": \"Subject\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Subject\"\n                },\n                {\n                    \"code\": \"topic\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"name\": \"Topic\",\n                    \"description\": \"Choose a Topics\",\n                    \"index\": 8,\n                    \"inputType\": \"topicselector\",\n                    \"label\": \"Topics\",\n                    \"placeholder\": \"Choose Topics\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"notes\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"learningObjective\",\n                    \"description\": \"Add Notes\",\n                    \"index\": 4,\n                    \"inputType\": \"text\",\n                    \"label\": \"Notes to teacher\",\n                    \"placeholder\": \"Add Notes\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"learningObjective\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"name\": \"learningObjective\",\n                    \"description\": \"Brief desciption about learning objective\",\n                    \"index\": 5,\n                    \"inputType\": \"text\",\n                    \"label\": \"Learning objective\",\n                    \"placeholder\": \"Brief desciption about learning objective\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"duration\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"duration\",\n                    \"description\": \"Duration of Lesson Plan\",\n                    \"index\": 7,\n                    \"inputType\": \"number\",\n                    \"label\": \"Duration\",\n                    \"placeholder\": \"In minutes\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"year\",\n                    \"visible\": true,\n                    \"editable\": false,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Year\",\n                    \"description\": \"\",\n                    \"index\": 9,\n                    \"inputType\": \"select\",\n                    \"label\": \"Year\",\n                    \"placeholder\": \"Select Year\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"author\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Author\",\n                    \"description\": \"Original Author\",\n                    \"index\": 12,\n                    \"inputType\": \"text\",\n                    \"label\": \"Original Author\",\n                    \"placeholder\": \"Author\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"attributions\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"name\": \"attribution\",\n                    \"description\": \"Attributions\",\n                    \"index\": 13,\n                    \"inputType\": \"text\",\n                    \"label\": \"Attributions\",\n                    \"placeholder\": \"Attributions\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"copyright\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Copyright\",\n                    \"description\": \"Copyright\",\n                    \"index\": 14,\n                    \"inputType\": \"text\",\n                    \"label\": \"Copyright\",\n                    \"placeholder\": \"Copyright\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"copyrightYear\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"number\",\n                    \"renderingHints\": {},\n                    \"description\": \"Year of Creation\",\n                    \"index\": 15,\n                    \"label\": \"Year of Creation\",\n                    \"required\": true,\n                    \"name\": \"Year of Creation\",\n                    \"inputType\": \"number\",\n                    \"placeholder\": \"Enter Year of Creation\",\n                    \"validation\": [\n                        {\n                            \"type\": \"min\",\n                            \"message\": \"Maximum length of the year should be 4\",\n                            \"value\": \"4\"\n                        },\n                        {\n                            \"type\": \"max\",\n                            \"message\": \"Minimum length of the year should be 4\",\n                            \"value\": \"4\"\n                        }\n                    ]\n                },\n                {\n                    \"code\": \"license\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"license\",\n                    \"description\": \"License of the content\",\n                    \"index\": 16,\n                    \"inputType\": \"licenses\",\n                    \"label\": \"license\",\n                    \"placeholder\": \"license\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"licenseterms\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"defaultValue\": \"By creating any type of content (resources, books, courses etc.) on Sunbird, you consent to publish it under the Creative Commons License Framework. Please choose the applicable creative commons license you wish to apply to your content.\",\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {\n                        \"value\": {\n                            \"video/x-youtube\": \"By linking or uploading YouTube videos on Sunbird, you consent to publishing it as per the terms of the YouTube video license. Sunbird accepts only videos with YouTube Standard License or Creative Commons License.\"\n                        },\n                        \"class\": \"twelve wide field\"\n                    },\n                    \"description\": \"licenseterms\",\n                    \"index\": 17,\n                    \"label\": \"License Terms\",\n                    \"required\": false,\n                    \"name\": \"licenseterms\",\n                    \"inputType\": \"label\",\n                    \"placeholder\": \"license\"\n                }\n            ]\n        },\n        \"rootOrgId\": \"*\"\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "8. Assessment Question save",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"action\": \"question-meta-save\",\n        \"subType\": \"questions\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"type\": \"content\",\n        \"popup\": false,\n        \"metadata\": {\n            \"max_score\": 1,\n            \"isShuffleOption\": false,\n            \"isPartialScore\": true,\n            \"evalUnordered\": false,\n            \"templateType\": \"Horizontal\",\n            \"name\": \"____ is my country\\n\",\n            \"title\": \"____ is my country\\n\"\n        },\n        \"data\": {\n            \"templateName\": \"questionMetaDataTemplate\",\n            \"action\": \"question-meta-save\",\n            \"fields\": [\n                {\n                    \"code\": \"name\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Title\",\n                    \"description\": \"Title of the question\",\n                    \"index\": 0,\n                    \"inputType\": \"text\",\n                    \"label\": \"Title\",\n                    \"placeholder\": \"Enter the Title\",\n                    \"required\": true\n                },\n                {\n                    \"code\": \"description\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"name\": \"Description\",\n                    \"description\": \"Brief description\",\n                    \"index\": 1,\n                    \"inputType\": \"textarea\",\n                    \"label\": \"Description\",\n                    \"placeholder\": \"Enter the Description\",\n                    \"required\": false\n                },\n                {\n                    \"code\": \"board\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"medium\",\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"board\",\n                    \"index\": 2,\n                    \"label\": \"Board/Syllabus\",\n                    \"required\": true,\n                    \"name\": \"Board/Syllabus\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Board/Syllabus\"\n                },\n                {\n                    \"code\": \"medium\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"gradeLevel\",\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 3,\n                    \"label\": \"Medium\",\n                    \"required\": true,\n                    \"name\": \"medium\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Medium\"\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"subject\",\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"list\",\n                    \"renderingHints\": {},\n                    \"description\": \"Class\",\n                    \"index\": 4,\n                    \"label\": \"Grade Level\",\n                    \"required\": true,\n                    \"name\": \"Class\",\n                    \"inputType\": \"multiselect\",\n                    \"placeholder\": \"Select Grade\"\n                },\n                {\n                    \"code\": \"subject\",\n                    \"visible\": true,\n                    \"depends\": [\n                        \"topic\"\n                    ],\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"Add subjects\",\n                    \"index\": 5,\n                    \"label\": \"Subject\",\n                    \"required\": true,\n                    \"name\": \"subject\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Subject\"\n                },\n                {\n                    \"code\": \"qlevel\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"text\",\n                    \"renderingHints\": {},\n                    \"description\": \"Add Notes\",\n                    \"index\": 7,\n                    \"range\": [\n                        \"EASY\",\n                        \"MEDIUM\",\n                        \"DIFFICULT\"\n                    ],\n                    \"label\": \"Level\",\n                    \"required\": true,\n                    \"name\": \"qlevel\",\n                    \"inputType\": \"select\",\n                    \"placeholder\": \"Select Level\"\n                },\n                {\n                    \"code\": \"max_score\",\n                    \"visible\": true,\n                    \"editable\": true,\n                    \"dataType\": \"number\",\n                    \"renderingHints\": {},\n                    \"description\": \"\",\n                    \"index\": 8,\n                    \"label\": \"Max Score\",\n                    \"required\": true,\n                    \"name\": \"max_score\",\n                    \"inputType\": \"number\",\n                    \"placeholder\": \"Enter the Max Score\",\n                    \"validation\": [\n                        {\n                            \"type\": \"min\",\n                            \"message\": \"\",\n                            \"value\": \"1\"\n                        }\n                    ]\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "9. Collection create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"type\": \"content\",\n        \"action\": \"create\",\n        \"subType\": \"collection\",\n        \"framework\": \"*\",\n        \"rootOrgId\": \"*\",\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"create\",\n            \"fields\": [\n                {\n                    \"code\": \"name\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Name\",\n                    \"label\": \"Name\",\n                    \"description\": \"Name\",\n                    \"editable\": true,\n                    \"placeholder\": \"Name\",\n                    \"inputType\": \"text\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"index\": 1\n                },\n                {\n                    \"code\": \"description\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Description\",\n                    \"label\": \"Description\",\n                    \"description\": \"description\",\n                    \"placeholder\": \"Description\",\n                    \"editable\": true,\n                    \"inputType\": \"text\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"index\": 2\n                },\n                {\n                    \"code\": \"primaryCategory\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Collection Type\",\n                    \"label\": \"Collection Type\",\n                    \"description\": \"Collection Type\",\n                    \"placeholder\": \"Select one\",\n                    \"editable\": true,\n                    \"inputType\": \"select\",\n                    \"required\": true,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"index\": 3\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "10. Textbook create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{apikey}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"request\": {\n        \"type\": \"content\",\n        \"action\": \"create\",\n        \"subType\": \"textbook\",\n        \"rootOrgId\": \"*\",\n        \"framework\": \"*\",\n        \"data\": {\n            \"templateName\": \"defaultTemplate\",\n            \"action\": \"review\",\n            \"fields\": [\n                {\n                    \"code\": \"name\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Name\",\n                    \"label\": \"Name\",\n                    \"description\": \"Name\",\n                    \"editable\": true,\n                    \"placeholder\": \"Name\",\n                    \"inputType\": \"text\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"twelve\"\n                    },\n                    \"index\": 1,\n                    \"validation\": [\n                        {\n                            \"type\": \"regex\",\n                            \"value\": \"^[a-zA-Z0-9 &]*$\",\n                            \"message\": \"Invalid Input\"\n                        },\n                        {\n                            \"type\": \"max\",\n                            \"value\": \"80\",\n                            \"message\": \"Input is Exceded\"\n                        }\n                    ]\n                },\n                {\n                    \"code\": \"board\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Board\",\n                    \"label\": \"Board\",\n                    \"description\": \"Education Board (Like MP Board, NCERT, etc)\",\n                    \"editable\": true,\n                    \"placeholder\": \"Board\",\n                    \"inputType\": \"select\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 2,\n                    \"depends\": [\n                        \"medium\"\n                    ]\n                },\n                {\n                    \"code\": \"medium\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Medium\",\n                    \"label\": \"Medium\",\n                    \"description\": \"Medium of instruction\",\n                    \"editable\": true,\n                    \"placeholder\": \"Medium\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 3,\n                    \"depends\": [\n                        \"gradeLevel\"\n                    ]\n                },\n                {\n                    \"code\": \"gradeLevel\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Grade\",\n                    \"label\": \"Grade\",\n                    \"description\": \"Grade\",\n                    \"editable\": true,\n                    \"placeholder\": \"Grade\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 4,\n                    \"depends\": [\n                        \"subject\"\n                    ]\n                },\n                {\n                    \"code\": \"subject\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Subject\",\n                    \"label\": \"Subject\",\n                    \"description\": \"Subject of the Content to use to teach\",\n                    \"editable\": true,\n                    \"placeholder\": \"Grade\",\n                    \"inputType\": \"multiSelect\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 5\n                },\n                {\n                    \"code\": \"publisher\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Publisher\",\n                    \"label\": \"Publisher\",\n                    \"description\": \"Medium of instruction\",\n                    \"editable\": true,\n                    \"placeholder\": \"Publisher\",\n                    \"inputType\": \"text\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 6,\n                    \"validation\": [\n                        {\n                            \"type\": \"regex\",\n                            \"value\": \"^[a-zA-Z0-9]*$\",\n                            \"message\": \"Invalid Input\"\n                        },\n                        {\n                            \"type\": \"max\",\n                            \"value\": \"25\",\n                            \"message\": \"Input is Exceded\"\n                        }\n                    ]\n                },\n                {\n                    \"code\": \"year\",\n                    \"dataType\": \"text\",\n                    \"name\": \"Year\",\n                    \"label\": \"Year\",\n                    \"description\": \"Year\",\n                    \"editable\": true,\n                    \"placeholder\": \"Year\",\n                    \"inputType\": \"select\",\n                    \"required\": false,\n                    \"displayProperty\": \"Editable\",\n                    \"visible\": true,\n                    \"renderingHints\": {\n                        \"semanticColumnWidth\": \"six\"\n                    },\n                    \"index\": 7\n                }\n            ]\n        }\n    }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/api/data/v1/form/create",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data",
+                    "v1",
+                    "form",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
         },
         {
           "name": "Add-Ons",
